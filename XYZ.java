@@ -7,11 +7,85 @@ public class XYZ {
         Applicant a1  = new Applicant(); //Object of class Applicant
         a1.getApplicantAttributes(); //Sets name, age, gender, phone number, email and nationality
         String initial_documents = "approved"; //Initial documents verfication status (initialized)
+        String all_valid = "invalid"; //Variable to hold all documents validity (initialized to invalid)
+        Assistant_Registration_Officer ar1 = new Assistant_Registration_Officer(); //Object of class Assistant_Registration_Officer
+        
         String appl_nationality = a1.getNationality(); //Gets nationality 
+        
         String pass_validity = a1.getPassport(); //Gets passport validity
+        String verifyPass = ar1.verifyPassport(pass_validity); //Checks passport validity
+        if(verifyPass.equalsIgnoreCase("valid")) {
+            System.out.println("Valid passport, proceeding to vaccination certificate");
+        }
+        else if(verifyPass.equalsIgnoreCase("invalid")) {
+            while(verifyPass.equalsIgnoreCase("invalid")) {
+                System.out.println("Provide a valid passport and try again");
+                System.out.println("");
+                pass_validity = a1.getPassport();
+                verifyPass = ar1.verifyPassport(pass_validity);
+            }
+            System.out.println("Valid passport, proceeding to vaccination certificate verification");
+        }
+        
         String vacc_validity = a1.getVaccination(); //Gets vaccination validity
+        String verifyVacc = ar1.verifyVaccination(vacc_validity); //Checks vaccination validity
+        if(verifyVacc.equalsIgnoreCase("valid")) {
+            System.out.println("Valid vaccination certificate, proceeding to medical certificate verification");
+        }
+        else if(verifyVacc.equalsIgnoreCase("invalid")) {
+            while(verifyVacc.equalsIgnoreCase("invalid")) {
+                System.out.println("Provide a valid vaccination certificate and try again");
+                System.out.println("");
+                vacc_validity = a1.getVaccination();
+                verifyVacc = ar1.verifyVaccination(vacc_validity);
+            }
+            System.out.println("Valid vaccination certificate, proceeding to medical certificate verification");
+        }
+        
         String medi_validity = a1.getMedical();  //Gets medical certificate validity
+        String verifyMedi = ar1.verifyMedical(medi_validity); //Checks medical certificate validity
+        if(verifyMedi.equalsIgnoreCase("valid")) {
+            System.out.println("Valid medical certificate, proceeding to payment status check");
+        }
+        else if(verifyMedi.equalsIgnoreCase("invalid")) {
+            while(verifyMedi.equalsIgnoreCase("invalid")) {
+                System.out.println("Provide a valid medical certificate and try again");
+                System.out.println("");
+                medi_validity = a1.getMedical();
+                verifyMedi = ar1.verifyMedical(medi_validity);
+            }
+            System.out.println("Valid medical certificate, proceeding to payment status check");
+        }
+        
         String pay_validity = a1.getPayments(); //Gets payment status
+        String verifyPay = ar1.verifyPayments(pay_validity); //Checks payment status
+        if(verifyPay.equalsIgnoreCase("valid") && appl_nationality.equalsIgnoreCase("Local")) {
+            System.out.println("Payments complete, submitting documents for approval");
+            all_valid = "valid";
+        }
+        else if(verifyPay.equalsIgnoreCase("invalid")) {
+            while(verifyPay.equalsIgnoreCase("invalid")) {
+                System.out.println("Pay off payables and try again");
+                System.out.println("");
+                pay_validity = a1.getPayments();
+                verifyPay = ar1.verifyPayments(pay_validity);
+            }
+            System.out.println("Payments complete, submitting documents for approval");
+            all_valid = "valid";
+        }
+        else if(verifyPay.equalsIgnoreCase("valid") && (!"Local".equalsIgnoreCase(appl_nationality))) {
+            System.out.println("Payments complete, proceeding to additional documents verfication (for international applicants only)");
+        }
+        else if(verifyPay.equalsIgnoreCase("invalid") && (!"Local".equalsIgnoreCase(appl_nationality))) {
+            while(verifyPay.equalsIgnoreCase("invalid")) {
+                System.out.println("Pay off payables and try again");
+                System.out.println("");
+                pay_validity = a1.getPayments();
+                verifyPay = ar1.verifyPayments(pay_validity);
+            }
+            System.out.println("Payments complete, proceeding to additional documents verfication");
+        }
+        
         String addDoc_validity; //Variable to hold additional document validity
         if(!"Local".equalsIgnoreCase(appl_nationality)) {
             addDoc_validity = a1.getAdditionalDocuments(); //Gets additional document validity
@@ -19,60 +93,26 @@ public class XYZ {
         else {
             addDoc_validity = "n/a"; //Assigned a null value
         }
-        String all_valid = "invalid"; //Variable to hold all documents validity (initialized to invalid)
-        
-        Assistant_Registration_Officer ar1 = new Assistant_Registration_Officer(); //Object of class Assistant_Registration_Officer
-        String verifyPass = ar1.verifyPassport(pass_validity); //Checks passport validity
-        if(verifyPass.equalsIgnoreCase("valid")) { // If passport is valid
-            System.out.println("Valid passport, proceeding to vaccination verification");
-            String verifyVacc = ar1.verifyVaccination(vacc_validity); //Checks vaccination validity 
-            if(verifyVacc.equalsIgnoreCase("valid")) { //If vaccination is valid
-                System.out.println("Valid vaccination certificate, proceeding to medical certification");
-                String verifyMedi = ar1.verifyMedical(medi_validity); //Checks medical certificate validity
-                if(verifyMedi.equalsIgnoreCase("valid")) {// If medical certificate is valid
-                    System.out.println("Valid medical certificate, proceeding to payments verification");
-                    String verifyPay = ar1.verifyPayments(pay_validity); //Checks payment status
-                    if(verifyPay.equalsIgnoreCase("valid")) { //If payment is complete
-                        if(appl_nationality.equalsIgnoreCase("Local")) { //If nationality is 'local'
-                            all_valid = "valid"; //Set all documents to valid
-                            System.out.println("Payments complete and all documents submitted, proceeding to approval");
-                        }
-                        else if(!"Local".equalsIgnoreCase(appl_nationality)) { //If nationality is not local
-                            System.out.println("Payments complete, proceeding to additional documents verification (only for international applicants)");
-                            String verifyAddDoc = ar1.verifyAddtionalDocument(addDoc_validity); //Checks if additional documents are valid
-                        }
-                    }
-                    else if(verifyPay.equalsIgnoreCase("invalid")) { //If payment is incomplete
-                        System.out.println("Pay the payables in full amount and try again");
-                        System.out.println("");
-                        pay_validity = a1.getPayments();//Gets payment status again
-                        verifyPay = ar1.verifyPayments(pay_validity); //Repeats payment status check again
-                    }
-                }
-                else if(verifyMedi.equalsIgnoreCase("invalid")) { //If medical certificate is invalid
-                    System.out.println("Provide valid medical certificates and try again");
-                    System.out.println("");
-                    medi_validity = a1.getMedical(); //Gets medical certificate validity again
-                    verifyMedi = ar1.verifyMedical(medi_validity); //Repeats medical certificate validity check again
-                }
-            }
-            else if(verifyVacc.equalsIgnoreCase("invalid")) { //If vaccination certificate is invalid
-                System.out.println("Provide valid vaccination certificate and try again");
+        String verifyAddDoc = ar1.verifyAddtionalDocument(addDoc_validity); //Checks if additional documents are valid
+        if(verifyAddDoc.equalsIgnoreCase("valid")) {
+            System.out.println("Valid additional documents, submitted documents for approval");
+            all_valid = "valid";
+        }
+        else if(verifyAddDoc.equalsIgnoreCase("invalid")) {
+            while(verifyAddDoc.equalsIgnoreCase("invalid")) {
+                System.out.println("Provide valid additional documents and try again");
                 System.out.println("");
-                vacc_validity = a1.getVaccination(); //Gets vaccination validity again
-                verifyVacc = ar1.verifyVaccination(vacc_validity); //Repeats vaccination validity check again
+                addDoc_validity = a1.getAdditionalDocuments();
+                verifyAddDoc = ar1.verifyAddtionalDocument(addDoc_validity);
             }
+            System.out.println("Valid additional documents, submitted documents for approval");
+            all_valid = "valid";
         }
-        else if(verifyPass.equalsIgnoreCase("invalid")) { //If vaccination certificate is invalid
-            System.out.println("Provide a valid passport and try again");
-            System.out.println("");
-            pass_validity = a1.getPassport(); //Gets passport validity again
-            verifyPass = ar1.verifyPassport(pass_validity); //Repeats passport validity check again
-        }
+        
         ar1.setApplicantID(); //Sets applicant ID
         
         Registration_Officer ro1 = new Registration_Officer(); //Object of class Registration_Officer
-        String approval = ro1.setApproval(all_valid); //Sets approval status of documents if all documents are valid
+        String approval = ro1.setApproval(all_valid); //Sets approval status of documents, based on the validity of all the documents submitted
         if(approval.equalsIgnoreCase("approved")) { //If documents are approved
             System.out.println("All documents approved, proceeding to financial status verification");
         }
