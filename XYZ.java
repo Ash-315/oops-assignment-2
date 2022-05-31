@@ -6,7 +6,7 @@ public class XYZ {
     public static void main(String args[]) {
         Applicant a1  = new Applicant(); //Object of class Applicant
         String initial_documents = a1.getApplicantAttributes(); //Sets name, age, gender, phone number, email and nationality
-        String all_valid = "invalid"; //Variable to hold all documents validity (initialized to invalid)
+        String all_valid = "Invalid"; //Variable to hold all documents validity (initialized to invalid)
         Assistant_Registration_Officer ar1 = new Assistant_Registration_Officer(); //Object of class Assistant_Registration_Officer
         
         String appl_nationality = a1.getNationality(); //Gets nationality 
@@ -14,11 +14,11 @@ public class XYZ {
         //all while() loops at any point in the code exist only to prevent user from inputting wrong/invalid information (such as 'null')
         String pass_validity = a1.getPassport(); //Gets passport validity
         String verifyPass = ar1.verifyPassport(pass_validity); //Checks and assigns passport validity
-        if(verifyPass.equalsIgnoreCase("valid")) { //Passport valid
+        if(verifyPass.equalsIgnoreCase("Valid")) { //Passport valid
             System.out.println("Valid passport, proceeding to vaccination certificate");
         }
-        else if(verifyPass.equalsIgnoreCase("invalid")) { //Passport invalid
-            while(verifyPass.equalsIgnoreCase("invalid")) {
+        else if(verifyPass.equalsIgnoreCase("Invalid")) { //Passport invalid
+            while(verifyPass.equalsIgnoreCase("Invalid")) {
                 System.out.println("Provide a valid passport and try again");
                 System.out.println("");
                 pass_validity = a1.getPassport();
@@ -32,8 +32,8 @@ public class XYZ {
         if(verifyVacc.equalsIgnoreCase("valid")) { //Vaccination certificate valid
             System.out.println("Valid vaccination certificate, proceeding to medical certificate verification");
         }
-        else if(verifyVacc.equalsIgnoreCase("invalid")) { //Vaccination certificate invalid
-            while(verifyVacc.equalsIgnoreCase("invalid")) {
+        else if(verifyVacc.equalsIgnoreCase("Invalid")) { //Vaccination certificate invalid
+            while(verifyVacc.equalsIgnoreCase("Invalid")) {
                 System.out.println("Provide a valid vaccination certificate and try again");
                 System.out.println("");
                 vacc_validity = a1.getVaccination();
@@ -44,11 +44,11 @@ public class XYZ {
         
         String medi_validity = a1.getMedical();  //Gets medical certificate validity
         String verifyMedi = ar1.verifyMedical(medi_validity); //Checks and assigns medical certificate validity
-        if(verifyMedi.equalsIgnoreCase("valid")) { //Medical certificate valid
+        if(verifyMedi.equalsIgnoreCase("Valid")) { //Medical certificate valid
             System.out.println("Valid medical certificate, proceeding to payment status check");
         }
-        else if(verifyMedi.equalsIgnoreCase("invalid")) {
-            while(verifyMedi.equalsIgnoreCase("invalid")) { //Medical Certificate invalid
+        else if(verifyMedi.equalsIgnoreCase("Invalid")) {
+            while(verifyMedi.equalsIgnoreCase("Invalid")) { //Medical Certificate invalid
                 System.out.println("Provide a valid medical certificate and try again");
                 System.out.println("");
                 medi_validity = a1.getMedical();
@@ -60,25 +60,25 @@ public class XYZ {
         //all_valid value is changed to 'valid' at different points in code, since if the condition is satisfied, all necessary documents have been submitted by user at said points
         String pay_validity = a1.getPayments(); //Gets payment status
         String verifyPay = ar1.verifyPayments(pay_validity); //Checks and assigns payment status
-        if(verifyPay.equalsIgnoreCase("valid") && appl_nationality.equalsIgnoreCase("Local")) { //Payments complete and nationality is equal to 'Local'
+        if(verifyPay.equalsIgnoreCase("Valid") && appl_nationality.equalsIgnoreCase("Local")) { //Payments complete and nationality is equal to 'Local'
             System.out.println("Payments complete, submitting documents for approval");
-            all_valid = "valid";
+            all_valid = "Valid";
         }
-        else if(verifyPay.equalsIgnoreCase("invalid") && appl_nationality.equalsIgnoreCase("Local")) { //Payments incomplete and nationality is equal to 'Local'
-            while(verifyPay.equalsIgnoreCase("invalid")) {
+        else if(verifyPay.equalsIgnoreCase("Invalid") && appl_nationality.equalsIgnoreCase("Local")) { //Payments incomplete and nationality is equal to 'Local'
+            while(verifyPay.equalsIgnoreCase("Invalid")) {
                 System.out.println("Pay off payables and try again");
                 System.out.println("");
                 pay_validity = a1.getPayments();
                 verifyPay = ar1.verifyPayments(pay_validity);
             }
             System.out.println("Payments complete, submitting documents for approval");
-            all_valid = "valid";
+            all_valid = "Valid";
         }
-        else if(verifyPay.equalsIgnoreCase("valid") && (!"Local".equalsIgnoreCase(appl_nationality))) { //Payments complete and nationality is not equal to 'Local'
+        else if(verifyPay.equalsIgnoreCase("Valid") && (!"Local".equalsIgnoreCase(appl_nationality))) { //Payments complete and nationality is not equal to 'Local'
             System.out.println("Payments complete, proceeding to additional documents verfication (for international applicants only)");
         }
-        else if(verifyPay.equalsIgnoreCase("invalid") && (!"Local".equalsIgnoreCase(appl_nationality))) { //Payments incomplete and nationality is not equal to 'Local'
-            while(verifyPay.equalsIgnoreCase("invalid")) {
+        else if(verifyPay.equalsIgnoreCase("Invalid") && (!"Local".equalsIgnoreCase(appl_nationality))) { //Payments incomplete and nationality is not equal to 'Local'
+            while(verifyPay.equalsIgnoreCase("Invalid")) {
                 System.out.println("Pay off payables and try again");
                 System.out.println("");
                 pay_validity = a1.getPayments();
@@ -95,26 +95,26 @@ public class XYZ {
             addDoc_validity = "n/a"; //Assigned a null value
         }
         String verifyAddDoc = ar1.verifyAddtionalDocument(addDoc_validity); //Checks if additional documents are valid
-        if(verifyAddDoc.equalsIgnoreCase("valid")) { //Addtional documents valid
+        if(verifyAddDoc.equalsIgnoreCase("Valid")) { //Addtional documents valid
             System.out.println("Valid additional documents, submitted documents for approval");
-            all_valid = "valid";
+            all_valid = "Valid";
         }
-        else if(verifyAddDoc.equalsIgnoreCase("invalid")) { //Additional documents invalid
-            while(verifyAddDoc.equalsIgnoreCase("invalid")) {
+        else if(verifyAddDoc.equalsIgnoreCase("Invalid")) { //Additional documents invalid
+            while(verifyAddDoc.equalsIgnoreCase("Invalid")) {
                 System.out.println("Provide valid additional documents and try again");
                 System.out.println("");
                 addDoc_validity = a1.getAdditionalDocuments();
                 verifyAddDoc = ar1.verifyAddtionalDocument(addDoc_validity);
             }
             System.out.println("Valid additional documents, submitted documents for approval");
-            all_valid = "valid";
+            all_valid = "Valid";
         }
         
         ar1.setApplicantID(); //Sets applicant ID
         
         Registration_Officer ro1 = new Registration_Officer(); //Object of class Registration_Officer
         String approval = ro1.setApproval(all_valid); //Sets approval status of documents, based on the validity of all the documents submitted
-        if(approval.equalsIgnoreCase("approved")) { //If documents are approved
+        if(approval.equalsIgnoreCase("Approved")) { //If documents are approved
             System.out.println("All documents approved, proceeding to financial status verification");
         }
         else if(approval.equalsIgnoreCase("invalid")) { //If documents are unapproved
@@ -220,7 +220,7 @@ class Applicant {
             }    
         }
         
-        return "approved";
+        return "Approved"; //Returns only if all other variables above have valid values
     }
     String getNationality() { //Gets applicant nationality
         return appl_nationality;
@@ -294,42 +294,42 @@ class Assistant_Registration_Officer {
     }
     String verifyPassport(String pass_validity) { //Checks passport validity
         if(pass_validity.equalsIgnoreCase("y")) {
-            return "valid";
+            return "Valid";
         }
         else {
-            return "invalid";
+            return "Invalid";
         }
     }
     String verifyVaccination(String vacc_validity) { //Checks vaccination validity
         if(vacc_validity.equalsIgnoreCase("y")) {
-            return "valid";
+            return "Valid";
         }
         else {
-            return "invalid";
+            return "Invalid";
         }
     }
     String verifyMedical(String medi_validity) { //Checks medical certificate validity
         if(medi_validity.equalsIgnoreCase("y")) {
-            return "valid";
+            return "Valid";
         }
         else {
-            return "invalid";
+            return "Invalid";
         }
     }
     String verifyPayments(String pay_validity) { //Checks payment status 
         if(pay_validity.equalsIgnoreCase("y")) {
-            return "valid";
+            return "Valid";
         }
         else {
-            return "invalid";
+            return "Invalid";
         }
     }
     String verifyAddtionalDocument(String addDoc_validity) { //Checks additional documents validity
         if(addDoc_validity.equalsIgnoreCase("y")) {
-            return "valid";
+            return "Valid";
         }
         else {
-            return "valid";
+            return "Invalid";
         }
     }
 }
@@ -347,11 +347,11 @@ class Registration_Officer {
     
     //Functions
     String setApproval(String all_validity){ //Sets applicant documents approval status
-        if(all_validity.equalsIgnoreCase("valid")) {
-            return "approved";
+        if(all_validity.equalsIgnoreCase("Valid")) {
+            return "Approved";
         }
         else {
-            return "unapproved";
+            return "Unapproved";
         }
     }
 }
