@@ -11,12 +11,13 @@ public class XYZ {
         
         String appl_nationality = a1.getNationality(); //Gets nationality 
         
+        //all while() loops at any point in the code exist only to prevent user from inputting wrong/invalid information (such as 'null')
         String pass_validity = a1.getPassport(); //Gets passport validity
-        String verifyPass = ar1.verifyPassport(pass_validity); //Checks passport validity
-        if(verifyPass.equalsIgnoreCase("valid")) {
+        String verifyPass = ar1.verifyPassport(pass_validity); //Checks and assigns passport validity
+        if(verifyPass.equalsIgnoreCase("valid")) { //Passport valid
             System.out.println("Valid passport, proceeding to vaccination certificate");
         }
-        else if(verifyPass.equalsIgnoreCase("invalid")) {
+        else if(verifyPass.equalsIgnoreCase("invalid")) { //Passport invalid
             while(verifyPass.equalsIgnoreCase("invalid")) {
                 System.out.println("Provide a valid passport and try again");
                 System.out.println("");
@@ -27,11 +28,11 @@ public class XYZ {
         }
         
         String vacc_validity = a1.getVaccination(); //Gets vaccination validity
-        String verifyVacc = ar1.verifyVaccination(vacc_validity); //Checks vaccination validity
-        if(verifyVacc.equalsIgnoreCase("valid")) {
+        String verifyVacc = ar1.verifyVaccination(vacc_validity); //Checks and assigns vaccination validity
+        if(verifyVacc.equalsIgnoreCase("valid")) { //Vaccination certificate valid
             System.out.println("Valid vaccination certificate, proceeding to medical certificate verification");
         }
-        else if(verifyVacc.equalsIgnoreCase("invalid")) {
+        else if(verifyVacc.equalsIgnoreCase("invalid")) { //Vaccination certificate invalid
             while(verifyVacc.equalsIgnoreCase("invalid")) {
                 System.out.println("Provide a valid vaccination certificate and try again");
                 System.out.println("");
@@ -42,12 +43,12 @@ public class XYZ {
         }
         
         String medi_validity = a1.getMedical();  //Gets medical certificate validity
-        String verifyMedi = ar1.verifyMedical(medi_validity); //Checks medical certificate validity
-        if(verifyMedi.equalsIgnoreCase("valid")) {
+        String verifyMedi = ar1.verifyMedical(medi_validity); //Checks and assigns medical certificate validity
+        if(verifyMedi.equalsIgnoreCase("valid")) { //Medical certificate valid
             System.out.println("Valid medical certificate, proceeding to payment status check");
         }
         else if(verifyMedi.equalsIgnoreCase("invalid")) {
-            while(verifyMedi.equalsIgnoreCase("invalid")) {
+            while(verifyMedi.equalsIgnoreCase("invalid")) { //Medical Certificate invalid
                 System.out.println("Provide a valid medical certificate and try again");
                 System.out.println("");
                 medi_validity = a1.getMedical();
@@ -56,13 +57,14 @@ public class XYZ {
             System.out.println("Valid medical certificate, proceeding to payment status check");
         }
         
+        //all_valid value is changed to 'valid' at different points in code, since if the condition is satisfied, all necessary documents have been submitted by user at said points
         String pay_validity = a1.getPayments(); //Gets payment status
-        String verifyPay = ar1.verifyPayments(pay_validity); //Checks payment status
-        if(verifyPay.equalsIgnoreCase("valid") && appl_nationality.equalsIgnoreCase("Local")) {
+        String verifyPay = ar1.verifyPayments(pay_validity); //Checks and assigns payment status
+        if(verifyPay.equalsIgnoreCase("valid") && appl_nationality.equalsIgnoreCase("Local")) { //Payments complete and nationality is equal to 'Local'
             System.out.println("Payments complete, submitting documents for approval");
             all_valid = "valid";
         }
-        else if(verifyPay.equalsIgnoreCase("invalid")) {
+        else if(verifyPay.equalsIgnoreCase("invalid") && appl_nationality.equalsIgnoreCase("Local")) { //Payments incomplete and nationality is equal to 'Local'
             while(verifyPay.equalsIgnoreCase("invalid")) {
                 System.out.println("Pay off payables and try again");
                 System.out.println("");
@@ -72,10 +74,10 @@ public class XYZ {
             System.out.println("Payments complete, submitting documents for approval");
             all_valid = "valid";
         }
-        else if(verifyPay.equalsIgnoreCase("valid") && (!"Local".equalsIgnoreCase(appl_nationality))) {
+        else if(verifyPay.equalsIgnoreCase("valid") && (!"Local".equalsIgnoreCase(appl_nationality))) { //Payments complete and nationality is not equal to 'Local'
             System.out.println("Payments complete, proceeding to additional documents verfication (for international applicants only)");
         }
-        else if(verifyPay.equalsIgnoreCase("invalid") && (!"Local".equalsIgnoreCase(appl_nationality))) {
+        else if(verifyPay.equalsIgnoreCase("invalid") && (!"Local".equalsIgnoreCase(appl_nationality))) { //Payments incomplete and nationality is not equal to 'Local'
             while(verifyPay.equalsIgnoreCase("invalid")) {
                 System.out.println("Pay off payables and try again");
                 System.out.println("");
@@ -93,11 +95,11 @@ public class XYZ {
             addDoc_validity = "n/a"; //Assigned a null value
         }
         String verifyAddDoc = ar1.verifyAddtionalDocument(addDoc_validity); //Checks if additional documents are valid
-        if(verifyAddDoc.equalsIgnoreCase("valid")) {
+        if(verifyAddDoc.equalsIgnoreCase("valid")) { //Addtional documents valid
             System.out.println("Valid additional documents, submitted documents for approval");
             all_valid = "valid";
         }
-        else if(verifyAddDoc.equalsIgnoreCase("invalid")) {
+        else if(verifyAddDoc.equalsIgnoreCase("invalid")) { //Additional documents invalid
             while(verifyAddDoc.equalsIgnoreCase("invalid")) {
                 System.out.println("Provide valid additional documents and try again");
                 System.out.println("");
