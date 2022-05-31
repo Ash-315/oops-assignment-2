@@ -128,7 +128,14 @@ public class XYZ {
         Training_Officer to1 = new Training_Officer(); //Object of class Training_Officer
         to1.setTrainingSchedule(); //Sets training schedule
         to1.setTravelingSchedule(); //Sets traveling schedule
-        String trai_mode = a1.setTrainingMode(); //Sets the training mode of choice by applicant
+        boolean trai_mode = a1.setTrainingMode(); //Sets the training mode of choice by applicant
+        String trai_mode_string;
+        if(trai_mode == true) {
+            trai_mode_string = "Online";
+        }
+        else {
+            trai_mode_string = "Offline";
+        }
         
         //Final print statement before exiting program
         System.out.println("Final statement of all documents and choices");
@@ -136,7 +143,7 @@ public class XYZ {
         System.out.println("All initial documents: " + initial_documents);
         System.out.println("All extra documents: " + approval);
         System.out.println("Applicant Financial Status: " + finance_status);
-        System.out.println("Choice of training mode: " + trai_mode);
+        System.out.println("Choice of training mode: " + trai_mode_string);
         System.out.println("");
         System.out.println("If there is any discrepancy, please repeat procedure, exiting program");
         System.exit(0);
@@ -243,10 +250,28 @@ class Applicant {
         String addDoc_validity = sc.nextLine();
         return addDoc_validity;
     }
-    String setTrainingMode() { //Sets applicants choice of training mode 
-        System.out.println("Enter choice of online or offline training(Enter 'online'/'offline'): ");
-        String trai_mode = sc.nextLine();
-        return trai_mode;
+    boolean setTrainingMode() { //Sets applicants choice of training mode 
+        System.out.println("Enter choice of online or offline training(Enter 'y' for online/'n' for offline): ");
+        String trai_mode_string = sc.nextLine();
+        if(trai_mode_string.equalsIgnoreCase("y")) { //'True' value for online
+            return true;
+        }
+        else if(trai_mode_string.equalsIgnoreCase("n")) { //'False' value for offline
+            return false;
+        }
+        else {
+            while( (!"y".equalsIgnoreCase(trai_mode_string)) || (!"n".equalsIgnoreCase(trai_mode_string))) { //If choice typed in is not 'y'/'n'
+                System.out.println("Please enter a valid choice (y/n): ");
+                trai_mode_string = sc.nextLine();
+                if(trai_mode_string.equalsIgnoreCase("y")) {
+                    return true;
+                }
+                else if(trai_mode_string.equalsIgnoreCase("n")) {
+                    return false;
+                }
+            }
+        }
+        return false; //Returning false because a return statement is required (will not execute at all and is only there to prevent no return statement error)
     }
 }
 
