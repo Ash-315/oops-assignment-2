@@ -11,11 +11,13 @@ public class XYZ {
         
         String appl_nationality = a1.getNationality(); //Gets nationality 
         
-        //all while() loops at any point in the code exist only to prevent user from inputting wrong/invalid information (such as 'null')
+        //all System.out.println(""); statement at any point in the code exists only to make the output screen look cleaner and make it easier to understand
+        //all while() loops at any point in the code exists only to prevent user from inputting wrong/invalid information (such as 'null')
         String pass_validity = a1.getPassport(); //Gets passport validity
         String verifyPass = ar1.verifyPassport(pass_validity); //Checks and assigns passport validity
         if(verifyPass.equalsIgnoreCase("Valid")) { //Passport valid
             System.out.println("Valid passport, proceeding to vaccination certificate");
+            System.out.println("");
         }
         else if(verifyPass.equalsIgnoreCase("Invalid")) { //Passport invalid
             while(verifyPass.equalsIgnoreCase("Invalid")) {
@@ -25,12 +27,14 @@ public class XYZ {
                 verifyPass = ar1.verifyPassport(pass_validity);
             }
             System.out.println("Valid passport, proceeding to vaccination certificate verification");
+            System.out.println("");
         }
         
         String vacc_validity = a1.getVaccination(); //Gets vaccination validity
         String verifyVacc = ar1.verifyVaccination(vacc_validity); //Checks and assigns vaccination validity
         if(verifyVacc.equalsIgnoreCase("valid")) { //Vaccination certificate valid
             System.out.println("Valid vaccination certificate, proceeding to medical certificate verification");
+            System.out.println("");
         }
         else if(verifyVacc.equalsIgnoreCase("Invalid")) { //Vaccination certificate invalid
             while(verifyVacc.equalsIgnoreCase("Invalid")) {
@@ -40,12 +44,14 @@ public class XYZ {
                 verifyVacc = ar1.verifyVaccination(vacc_validity);
             }
             System.out.println("Valid vaccination certificate, proceeding to medical certificate verification");
+            System.out.println("");
         }
         
         String medi_validity = a1.getMedical();  //Gets medical certificate validity
         String verifyMedi = ar1.verifyMedical(medi_validity); //Checks and assigns medical certificate validity
         if(verifyMedi.equalsIgnoreCase("Valid")) { //Medical certificate valid
             System.out.println("Valid medical certificate, proceeding to payment status check");
+            System.out.println("");
         }
         else if(verifyMedi.equalsIgnoreCase("Invalid")) {
             while(verifyMedi.equalsIgnoreCase("Invalid")) { //Medical Certificate invalid
@@ -55,6 +61,7 @@ public class XYZ {
                 verifyMedi = ar1.verifyMedical(medi_validity);
             }
             System.out.println("Valid medical certificate, proceeding to payment status check");
+            System.out.println("");
         }
         
         //all_valid value is changed to 'valid' at different points in code, since if the condition is satisfied, all necessary documents have been submitted by user at said points
@@ -62,6 +69,7 @@ public class XYZ {
         String verifyPay = ar1.verifyPayments(pay_validity); //Checks and assigns payment status
         if(verifyPay.equalsIgnoreCase("Valid") && appl_nationality.equalsIgnoreCase("Local")) { //Payments complete and nationality is equal to 'Local'
             System.out.println("Payments complete, submitting documents for approval");
+            System.out.println("");
             all_valid = "Valid";
         }
         else if(verifyPay.equalsIgnoreCase("Invalid") && appl_nationality.equalsIgnoreCase("Local")) { //Payments incomplete and nationality is equal to 'Local'
@@ -72,10 +80,12 @@ public class XYZ {
                 verifyPay = ar1.verifyPayments(pay_validity);
             }
             System.out.println("Payments complete, submitting documents for approval");
+            System.out.println("");
             all_valid = "Valid";
         }
         else if(verifyPay.equalsIgnoreCase("Valid") && (!"Local".equalsIgnoreCase(appl_nationality))) { //Payments complete and nationality is not equal to 'Local'
             System.out.println("Payments complete, proceeding to additional documents verfication (for international applicants only)");
+            System.out.println("");
         }
         else if(verifyPay.equalsIgnoreCase("Invalid") && (!"Local".equalsIgnoreCase(appl_nationality))) { //Payments incomplete and nationality is not equal to 'Local'
             while(verifyPay.equalsIgnoreCase("Invalid")) {
@@ -85,6 +95,7 @@ public class XYZ {
                 verifyPay = ar1.verifyPayments(pay_validity);
             }
             System.out.println("Payments complete, proceeding to additional documents verfication");
+            System.out.println("");
         }
         
         String addDoc_validity; //Variable to hold additional document validity
@@ -97,6 +108,7 @@ public class XYZ {
         String verifyAddDoc = ar1.verifyAddtionalDocument(addDoc_validity); //Checks if additional documents are valid
         if(verifyAddDoc.equalsIgnoreCase("Valid")) { //Addtional documents valid
             System.out.println("Valid additional documents, submitted documents for approval");
+            System.out.println("");
             all_valid = "Valid";
         }
         else if(verifyAddDoc.equalsIgnoreCase("Invalid")) { //Additional documents invalid
@@ -107,6 +119,7 @@ public class XYZ {
                 verifyAddDoc = ar1.verifyAddtionalDocument(addDoc_validity);
             }
             System.out.println("Valid additional documents, submitted documents for approval");
+            System.out.println("");
             all_valid = "Valid";
         }
         
@@ -116,6 +129,7 @@ public class XYZ {
         String approval = ro1.setApproval(all_valid); //Sets approval status of documents, based on the validity of all the documents submitted
         if(approval.equalsIgnoreCase("Approved")) { //If documents are approved
             System.out.println("All documents approved, proceeding to financial status verification");
+            System.out.println("");
         }
         else if(approval.equalsIgnoreCase("invalid")) { //If documents are unapproved
             System.out.println("Error in entering details, please try again, exiting program");
@@ -123,7 +137,14 @@ public class XYZ {
         }
         
         Account_Officer ao1 = new Account_Officer(); //Object of class Account_Officer
-        String finance_status = ao1.setFinancialStatus(); //Sets financial status of applicant
+        boolean finance_status = ao1.setFinancialStatus(); //Sets financial status of applicant
+        String finance_status_string;
+        if(finance_status == true) {
+            finance_status_string = "Good";
+        }
+        else {
+            finance_status_string = "Bad";
+        }
         
         Training_Officer to1 = new Training_Officer(); //Object of class Training_Officer
         to1.setTrainingSchedule(); //Sets training schedule
@@ -142,7 +163,7 @@ public class XYZ {
         System.out.println("");
         System.out.println("All initial documents: " + initial_documents);
         System.out.println("All extra documents: " + approval);
-        System.out.println("Applicant Financial Status: " + finance_status);
+        System.out.println("Applicant Financial Status: " + finance_status_string);
         System.out.println("Choice of training mode: " + trai_mode_string);
         System.out.println("");
         System.out.println("If there is any discrepancy, please repeat procedure, exiting program");
@@ -170,6 +191,7 @@ class Applicant {
                 appl_name = sc.nextLine();
             }    
         }
+        System.out.println("");
         
         System.out.println("Enter the applicant age: ");
         appl_age = sc.nextInt();
@@ -181,6 +203,7 @@ class Applicant {
                 sc.nextLine();
             }
         }
+        System.out.println("");
         
         System.out.println("Enter the applicant gender: ");
         appl_gender = sc.nextLine();
@@ -190,6 +213,7 @@ class Applicant {
                 appl_gender = sc.nextLine();
             }    
         }
+        System.out.println("");
         
         System.out.println("Enter the applicant phone number: ");
         appl_phone_num = sc.nextInt();
@@ -201,6 +225,7 @@ class Applicant {
                 sc.nextLine();
             }
         }
+        System.out.println("");
         
         System.out.println("Enter the applicant email address: ");
         appl_email = sc.nextLine();
@@ -210,6 +235,7 @@ class Applicant {
                 appl_email = sc.nextLine();
             }
         }
+        System.out.println("");
         
         System.out.println("Enter the applicant nationality (type 'Local' if from home country): ");
         appl_nationality = sc.nextLine();
@@ -219,6 +245,7 @@ class Applicant {
                 appl_nationality = sc.nextLine();
             }    
         }
+        System.out.println("");
         
         return "Approved"; //Returns only if all other variables above have valid values
     }
@@ -291,6 +318,7 @@ class Assistant_Registration_Officer {
     void setApplicantID() { //Sets applicant's ID
         System.out.println("Enter the applicant ID: ");
         appl_id = sc.nextLine();
+        System.out.println();
     }
     String verifyPassport(String pass_validity) { //Checks passport validity
         if(pass_validity.equalsIgnoreCase("y")) {
@@ -368,10 +396,29 @@ class Account_Officer {
     private String accOff_email;
     
     //Functions
-    String setFinancialStatus() { //Sets financial status of the applicant
-        System.out.println("Enter financial status of the applicant (Enter 'good'/'bad'): ");
+    boolean setFinancialStatus() { //Sets financial status of the applicant
+        System.out.println("Enter financial status of the applicant (Enter 'y' for good/'n' for bad): ");
         String finance_status = sc.nextLine();
-        return finance_status;
+        if(finance_status.equalsIgnoreCase("y")) {
+            return true;
+        }
+        else if(finance_status.equalsIgnoreCase("n")) {
+            return false;
+        }
+        else {
+            while( (!"y".equalsIgnoreCase(finance_status)) || (!"n".equalsIgnoreCase(finance_status)) ) {
+                System.out.println("Please enter a valid choice (y/n): ");
+                finance_status = sc.nextLine();
+                if(finance_status.equalsIgnoreCase("y")) {
+                    return true;
+                }
+                else if(finance_status.equalsIgnoreCase("n")) {
+                    return false;
+                }
+            }
+        }
+        System.out.println("");
+        return false; //Returning false because a return statement is required (will not execute at all and is only there to prevent no return statement error)
     }
 }
 
