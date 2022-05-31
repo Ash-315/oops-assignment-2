@@ -22,7 +22,6 @@ public class XYZ {
         String all_valid = "invalid"; //Variable to hold all documents validity (initialized to invalid)
         
         Assistant_Registration_Officer ar1 = new Assistant_Registration_Officer(); //Object of class Assistant_Registration_Officer
-        ar1.setApplicantID(); //Sets applicant ID
         String verifyPass = ar1.verifyPassport(pass_validity); //Checks passport validity
         if(verifyPass.equalsIgnoreCase("valid")) { // If passport is valid
             System.out.println("Valid passport, proceeding to vaccination verification");
@@ -49,20 +48,12 @@ public class XYZ {
                         pay_validity = a1.getPayments();//Gets payment status again
                         verifyPay = ar1.verifyPayments(pay_validity); //Repeats payment status check again
                     }
-                    else {
-                        System.out.println("No value available, please perform procedure again");
-                        System.exit(0); 
-                    }
                 }
                 else if(verifyMedi.equalsIgnoreCase("invalid")) { //If medical certificate is invalid
                     System.out.println("Provide valid medical certificates and try again");
                     System.out.println("");
                     medi_validity = a1.getMedical(); //Gets medical certificate validity again
                     verifyMedi = ar1.verifyMedical(medi_validity); //Repeats medical certificate validity check again
-                }
-                else {
-                    System.out.println("No value available, please perform procedure again");
-                    System.exit(0);
                 }
             }
             else if(verifyVacc.equalsIgnoreCase("invalid")) { //If vaccination certificate is invalid
@@ -71,10 +62,6 @@ public class XYZ {
                 vacc_validity = a1.getVaccination(); //Gets vaccination validity again
                 verifyVacc = ar1.verifyVaccination(vacc_validity); //Repeats vaccination validity check again
             }
-            else {
-                System.out.println("No value available, please perform procedure again");
-                System.exit(0);
-            }
         }
         else if(verifyPass.equalsIgnoreCase("invalid")) { //If vaccination certificate is invalid
             System.out.println("Provide a valid passport and try again");
@@ -82,10 +69,7 @@ public class XYZ {
             pass_validity = a1.getPassport(); //Gets passport validity again
             verifyPass = ar1.verifyPassport(pass_validity); //Repeats passport validity check again
         }
-        else {
-            System.out.println("No value available, please perform procedure again");
-            System.exit(0);
-        }
+        ar1.setApplicantID(); //Sets applicant ID
         
         Registration_Officer ro1 = new Registration_Officer(); //Object of class Registration_Officer
         String approval = ro1.setApproval(all_valid); //Sets approval status of documents if all documents are valid
