@@ -4,6 +4,7 @@ import java.util.*;
 
 public class XYZ { 
     public static void main(String args[]) {
+        //Scanner class is invoked in every class for the user to be able to input values
         Scanner sc = new Scanner(System.in);
         
         Applicant a1  = new Applicant(); //Object of class Applicant
@@ -336,7 +337,7 @@ class Assistant_Registration_Officer {
     private String asstOff_gender;
     private int asstOff_phone_num;
     private String asstOff_email;
-    private String appl_id;
+    private String appl_id; //Applicant ID is set by Assistant Registration Officer
     
     //Functions
     void setApplicantID() { //Sets applicant's ID
@@ -457,6 +458,7 @@ class Training_Officer {
     private int traOff_phone_num;
     private String traOff_email;
     
+    //Variables to hold the traveling schedule
     private int trai_days;
     private String trai_date;
     private String trai_time;
