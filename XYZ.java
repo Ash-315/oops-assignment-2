@@ -67,7 +67,7 @@ public class XYZ {
         //all_valid value is changed to 'valid' at different points in code, since if the condition is satisfied, all necessary documents have been submitted by user at said points
         String pay_validity = a1.getPayments(); //Gets payment status
         String verifyPay = ar1.verifyPayments(pay_validity); //Checks and assigns payment status
-        if(verifyPay.equalsIgnoreCase("Valid") && appl_nationality.equalsIgnoreCase("Local")) { //Payments complete and nationality is equal to 'Local'
+        if(verifyPay.equalsIgnoreCase("Valid")) { //Payments complete and nationality is equal to 'Local'
             System.out.println("Payments complete, submitting documents for approval");
             System.out.println("");
             all_valid = "Valid";
@@ -106,23 +106,24 @@ public class XYZ {
             addDoc_validity = "n/a"; //Assigned a null value
         }
         String verifyAddDoc = ar1.verifyAddtionalDocument(addDoc_validity); //Checks if additional documents are valid
-        if(verifyAddDoc.equalsIgnoreCase("Valid")) { //Addtional documents valid
-            System.out.println("Valid additional documents, submitted documents for approval");
-            System.out.println("");
-            all_valid = "Valid";
-        }
-        else if(verifyAddDoc.equalsIgnoreCase("Invalid")) { //Additional documents invalid
-            while(verifyAddDoc.equalsIgnoreCase("Invalid")) {
-                System.out.println("Provide valid additional documents and try again");
+        if(!"Local".equalsIgnoreCase(appl_nationality)) { //Checks if nationality is not equal to local (additional documents is only for international applicants)
+            if(verifyAddDoc.equalsIgnoreCase("Valid")) { //Addtional documents valid
+                System.out.println("Valid additional documents, submitted documents for approval");
                 System.out.println("");
-                addDoc_validity = a1.getAdditionalDocuments();
-                verifyAddDoc = ar1.verifyAddtionalDocument(addDoc_validity);
+                all_valid = "Valid";
             }
-            System.out.println("Valid additional documents, submitted documents for approval");
-            System.out.println("");
-            all_valid = "Valid";
+            else if(verifyAddDoc.equalsIgnoreCase("Invalid")) { //Additional documents invalid
+                while(verifyAddDoc.equalsIgnoreCase("Invalid")) {
+                    System.out.println("Provide valid additional documents and try again");
+                    System.out.println("");
+                    addDoc_validity = a1.getAdditionalDocuments();
+                    verifyAddDoc = ar1.verifyAddtionalDocument(addDoc_validity);
+                }
+                System.out.println("Valid additional documents, submitted documents for approval");
+                System.out.println("");
+                all_valid = "Valid";
+            }
         }
-        
         ar1.setApplicantID(); //Sets applicant ID
         
         Registration_Officer ro1 = new Registration_Officer(); //Object of class Registration_Officer
