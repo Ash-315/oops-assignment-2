@@ -4,6 +4,8 @@ import java.util.*;
 
 public class XYZ { 
     public static void main(String args[]) {
+        Scanner sc = new Scanner(System.in);
+        
         Applicant a1  = new Applicant(); //Object of class Applicant
         String initial_documents = a1.getApplicantAttributes(); //Sets name, age, gender, phone number, email and nationality
         String all_valid = "Invalid"; //Variable to hold all documents validity (initialized to invalid)
@@ -146,10 +148,8 @@ public class XYZ {
         else {
             finance_status_string = "Bad";
         }
+        System.out.println("");
         
-        Training_Officer to1 = new Training_Officer(); //Object of class Training_Officer
-        to1.setTrainingSchedule(); //Sets training schedule
-        to1.setTravelingSchedule(); //Sets traveling schedule
         boolean trai_mode = a1.setTrainingMode(); //Sets the training mode of choice by applicant
         String trai_mode_string;
         if(trai_mode == true) {
@@ -158,6 +158,10 @@ public class XYZ {
         else {
             trai_mode_string = "Offline";
         }
+        System.out.println("");
+        
+        Training_Officer to1 = new Training_Officer(); //Object of class Training_Officer
+        to1.setTravelingSchedule(); //Sets traveling schedule
         
         //Final print statement before exiting program
         System.out.println("Final statement of all documents and choices");
@@ -166,6 +170,25 @@ public class XYZ {
         System.out.println("All extra documents: " + approval);
         System.out.println("Applicant Financial Status: " + finance_status_string);
         System.out.println("Choice of training mode: " + trai_mode_string);
+        System.out.println("");
+        
+        System.out.println("Would you like to see the training session and traveling schedule? (Enter 'y' for yes/'n' for no)");
+        String trai_view = sc.nextLine(); 
+        if(trai_view.equalsIgnoreCase("y")) { //Traveling schedule and training session is displayed
+            to1.getTravelingSchedule();
+            System.out.println("");
+            to1.displayTrainingSession();
+        }
+        else if(!"n".equalsIgnoreCase(trai_view)) { //If choice is not 'y'/'n'
+            while( (!"n".equalsIgnoreCase(trai_view)) || (!"y.".equalsIgnoreCase(trai_view))) {
+                System.out.println("Please enter a valid choice (y/n): ");
+                trai_view = sc.nextLine();
+                if(trai_view.equalsIgnoreCase("y")) {
+                    to1.getTravelingSchedule();
+                    to1.displayTrainingSession();
+                }
+            }
+        }
         System.out.println("");
         System.out.println("If there is any discrepancy, please repeat procedure, exiting program");
         System.exit(0);
@@ -424,6 +447,8 @@ class Account_Officer {
 }
 
 class Training_Officer {
+    Scanner sc = new Scanner(System.in);
+    
     //Attributes
     private String traOff_id;
     private String traOff_name;
@@ -432,11 +457,43 @@ class Training_Officer {
     private int traOff_phone_num;
     private String traOff_email;
     
+    private int trai_days;
+    private String trai_date;
+    private String trai_time;
+    private String trai_loc;
+    
     //Functions
-    void setTrainingSchedule() { //Sets training schedule
-        
+    void displayTrainingSession() { //Displays training sessions
+        System.out.println("1. Preparation and Intention");
+        System.out.println("2. Tawaf (7 times)");
+        System.out.println("3. Safa and Marwa");
+        System.out.println("4. Resting and Praying");
+        System.out.println("5. Day of Arafah");
+        System.out.println("6. Muzdalifah"); 
+        System.out.println("7. Rami (repeating)");
+        System.out.println("8. Qurbani");
+        System.out.println("9. Tawaf al-Ifadha");
+        System.out.println("10. Tawaf al-Wida");
     }
     void setTravelingSchedule() { //Sets traveling schedule
-        
+        System.out.println("Enter the number of days for training: ");
+        trai_days = sc.nextInt();
+        sc.nextLine();
+        System.out.println("");
+        System.out.println("Enter the training date ((DD/MM/YYYY) Format): ");
+        trai_date = sc.nextLine();
+        System.out.println("");
+        System.out.println("Enter the training time (in 24-hour format, Example:- 15:00 - 19:00): ");
+        trai_time = sc.nextLine();
+        System.out.println("");
+        System.out.println("Enter the training location: ");
+        trai_loc = sc.nextLine();
+        System.out.println("");
+    }
+    void getTravelingSchedule() { //Displays traveling schedule
+        System.out.println("Number of days of training: " + trai_days);
+        System.out.println("Training Date: " + trai_date);
+        System.out.println("Training Time: " + trai_time);
+        System.out.println("Training Location: " + trai_loc);
     }
 }
