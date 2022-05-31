@@ -5,8 +5,7 @@ import java.util.*;
 public class XYZ { 
     public static void main(String args[]) {
         Applicant a1  = new Applicant(); //Object of class Applicant
-        a1.getApplicantAttributes(); //Sets name, age, gender, phone number, email and nationality
-        String initial_documents = "approved"; //Initial documents verfication status (initialized)
+        String initial_documents = a1.getApplicantAttributes(); //Sets name, age, gender, phone number, email and nationality
         String all_valid = "invalid"; //Variable to hold all documents validity (initialized to invalid)
         Assistant_Registration_Officer ar1 = new Assistant_Registration_Officer(); //Object of class Assistant_Registration_Officer
         
@@ -153,7 +152,7 @@ class Applicant {
     private String appl_nationality;
     
     //Functions
-    void getApplicantAttributes() { //Applicant attributes are inputtted 
+    String getApplicantAttributes() { //Applicant attributes are inputtted 
         System.out.println("Enter the applicant name: ");
         appl_name = sc.nextLine();
         if(appl_name.equals("")) {
@@ -211,6 +210,8 @@ class Applicant {
                 appl_nationality = sc.nextLine();
             }    
         }
+        
+        return "approved";
     }
     String getNationality() { //Gets applicant nationality
         return appl_nationality;
