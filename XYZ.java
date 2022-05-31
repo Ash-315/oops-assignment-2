@@ -157,47 +157,59 @@ class Applicant {
         System.out.println("Enter the applicant name: ");
         appl_name = sc.nextLine();
         if(appl_name.equals("")) {
-            System.out.println("Please enter a valid name: ");
-            appl_name = sc.nextLine();
+            while(appl_name.equals("")) {
+                System.out.println("Please enter a valid name: ");
+                appl_name = sc.nextLine();
+            }    
         }
         
         System.out.println("Enter the applicant age: ");
         appl_age = sc.nextInt();
         sc.nextLine();
         if(appl_age == 0) {
-            System.out.println("Please enter a valid age: ");
-            appl_age = sc.nextInt();
-            sc.nextLine();
+            while(appl_age == 0) {
+                System.out.println("Please enter a valid age: ");
+                appl_age = sc.nextInt();
+                sc.nextLine();
+            }
         }
         
         System.out.println("Enter the applicant gender: ");
         appl_gender = sc.nextLine();
         if(appl_gender.equals("")) {
-            System.out.println("Please enter a valid name: ");
-            appl_gender = sc.nextLine();
+            while(appl_gender.equals("")) {
+                System.out.println("Please enter a valid name: ");
+                appl_gender = sc.nextLine();
+            }    
         }
         
         System.out.println("Enter the applicant phone number: ");
         appl_phone_num = sc.nextInt();
         sc.nextLine();
         if(appl_phone_num == 0) {
-            System.out.println("Please enter a valid phone number: ");
-            appl_phone_num = sc.nextInt();
-            sc.nextLine();
+            while(appl_phone_num == 0) {
+                System.out.println("Please enter a valid phone number: ");
+                appl_phone_num = sc.nextInt();
+                sc.nextLine();
+            }
         }
         
         System.out.println("Enter the applicant email address: ");
         appl_email = sc.nextLine();
         if(appl_email.equals("")) {
-            System.out.println("Please enter a valid email address: ");
-            appl_email = sc.nextLine();
+            while(appl_email.equals("")) {
+                System.out.println("Please enter a valid email address: ");
+                appl_email = sc.nextLine();
+            }
         }
         
         System.out.println("Enter the applicant nationality (type 'Local' if from home country): ");
         appl_nationality = sc.nextLine();
         if(appl_nationality.equals("")) {
-            System.out.println("Please enter a valid nationality: ");
-            appl_nationality = sc.nextLine();
+            while(appl_nationality.equals("")) {
+                System.out.println("Please enter a valid nationality: ");
+                appl_nationality = sc.nextLine();
+            }    
         }
     }
     String getNationality() { //Gets applicant nationality
